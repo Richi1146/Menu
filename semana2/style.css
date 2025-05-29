@@ -1,0 +1,135 @@
+:root {
+    /* Colores */
+    --color-primary: #A34A2A;
+    /* Marrón rojizo oscuro */
+    --color-secondary: #F0EAD6;
+    /* Crema suave */
+    --color-text-dark: #333333;
+    /* Texto oscuro principal */
+    --color-text-light: #FFFFFF;
+    /* Texto claro (para fondos oscuros) */
+    --color-background: #FFF8F0;
+    /* Fondo general del sitio */
+    --font-family-body: 'Inter', sans-serif;
+    --font-family-heading: 'Merriweather', serif;
+    --font-size-base: 16px;
+    --font-size-h1: 2.5rem;
+    /* 40px */
+    --font-size-h2: 2rem;
+    /* 32px */
+    --font-size-h3: 1.75rem;
+    /* 28px */
+    --font-size-h4: 1.5rem;
+    /* 24px */
+}
+
+/* Reiniciar el cuerpo */
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Reiniciar encabezados, párrafos y otros elementos */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+div {
+    margin: 0;
+    padding: 0;
+}
+
+/* Reiniciar listas */
+ul,
+ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Reiniciar enlaces */
+a {
+    text-decoration: none;
+}
+
+/* Reiniciar estilos de fuente */
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: sans-serif;
+}
+
+
+.bottom-nav {
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    background: var(--color-primary);
+    min-height: 40px;
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+    gap: 80px;
+    /* Crea un espacio de 10px entre los elementos */
+}
+
+nav a {
+    color: var(--color-text-light);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-family-heading);
+    color: var(--color-primary);
+    line-height: 1.2;
+    margin-bottom: var(--spacing-sm);
+    /* Espaciado inferior por defecto */
+}
+
+h1 {
+    font-size: var(--font-size-h1);
+}
+
+h2 {
+    font-size: var(--font-size-h2);
+}
+
+h3 {
+    font-size: var(--font-size-h3);
+}
+
+h4 {
+    font-size: var(--font-size-h4);
+}
+
+.container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--spacing-sm);
+    /* Padding lateral para móviles */
+    padding-right: var(--spacing-sm);
+    /* Padding lateral para móviles */
+}
+
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--color-accent);
+    /* Cambia a color de acento al pasar el ratón */
+    text-decoration: underline;
+}
+

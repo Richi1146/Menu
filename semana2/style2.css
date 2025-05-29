@@ -1,0 +1,500 @@
+/*
+         * CSS Personalizado para el Sitio Web del Restaurante
+         *
+         * Este archivo contiene todos los estilos para el sitio web,
+         * incluyendo variables CSS, un reset moderno, estilos generales,
+         * layout responsive, y componentes específicos como las tarjetas del menú.
+         *
+         * Se sigue una metodología mobile-first, lo que significa que los estilos
+         * base están diseñados para dispositivos móviles y luego se adaptan
+         * a pantallas más grandes usando media queries.
+         */
+
+        /* =====================================================================
+         * 1. Variables CSS (Custom Properties)
+         * Definición de colores corporativos, fuentes y tamaños para
+         * mantener la coherencia y facilitar cambios futuros.
+         * ===================================================================== */
+        :root {
+            /* Colores */
+            --color-primary: #A34A2A; /* Marrón rojizo oscuro */
+            --color-secondary: #F0EAD6; /* Crema suave */
+            --color-text-dark: #333333; /* Texto oscuro principal */
+            --color-text-light: #FFFFFF; /* Texto claro (para fondos oscuros) */
+            --color-background: #FFF8F0; /* Fondo general del sitio */
+            --color-accent: #E7B10A; /* Un toque de amarillo/dorado para acentos */
+
+            /* Tipografía */
+            --font-family-body: 'Inter', sans-serif;
+            --font-family-heading: 'Merriweather', serif;
+            --font-size-base: 16px;
+            --font-size-h1: 2.5rem; /* 40px */
+            --font-size-h2: 2rem;   /* 32px */
+            --font-size-h3: 1.75rem; /* 28px */
+            --font-size-h4: 1.5rem;  /* 24px */
+
+            /* Espaciado (basado en rem para escalabilidad) */
+            --spacing-xs: 0.5rem;  /* 8px */
+            --spacing-sm: 1rem;    /* 16px */
+            --spacing-md: 1.5rem;  /* 24px */
+            --spacing-lg: 2rem;    /* 32px */
+            --spacing-xl: 3rem;    /* 48px */
+            --spacing-xxl: 4rem;   /* 64px */
+        }
+
+        /* =====================================================================
+         * 2. Reset CSS Moderno (Complementando el reset de Tailwind)
+         * Asegura una base visual uniforme en todos los navegadores,
+         * eliminando inconsistencias predeterminadas.
+         * ===================================================================== */
+        html {
+            scroll-behavior: smooth; /* Desplazamiento suave para enlaces de anclaje */
+            -webkit-text-size-adjust: 100%; /* Evita problemas de zoom de texto en iOS */
+        }
+
+        body {
+            font-family: var(--font-family-body);
+            font-size: var(--font-size-base);
+            line-height: 1.6;
+            color: var(--color-text-dark);
+            background-color: var(--color-background);
+            -webkit-font-smoothing: antialiased; /* Mejorar el renderizado de fuentes */
+            text-rendering: optimizeLegibility; /* Mejorar la legibilidad del texto */
+            padding-bottom: 4rem; /* Espacio para la barra de navegación inferior fija */
+        }
+
+        /* Asegura que las imágenes no desborden sus contenedores */
+        img, picture, video, canvas, svg {
+            display: block;
+            max-width: 100%;
+            height: auto; /* Mantiene la relación de aspecto */
+        }
+
+        /* Elimina el estilo de lista predeterminado */
+        ul, ol {
+            list-style: none;
+        }
+
+        /* =====================================================================
+         * 3. Estilos Generales
+         * Estilos coherentes para elementos HTML comunes como títulos,
+         * párrafos, botones y enlaces.
+         * ===================================================================== */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-family-heading);
+            color: var(--color-primary);
+            line-height: 1.2;
+            margin-bottom: var(--spacing-sm); /* Espaciado inferior por defecto */
+        }
+
+        h1 { font-size: var(--font-size-h1); }
+        h2 { font-size: var(--font-size-h2); }
+        h3 { font-size: var(--font-size-h3); }
+        h4 { font-size: var(--font-size-h4); }
+
+        p {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        /* Estilos para el contenedor principal de contenido */
+        .container {
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: var(--spacing-sm); /* Padding lateral para móviles */
+            padding-right: var(--spacing-sm); /* Padding lateral para móviles */
+        }
+
+        /* Estilos de botones */
+        .btn {
+            display: inline-block;
+            padding: var(--spacing-sm) var(--spacing-md);
+            background-color: var(--color-primary);
+            color: var(--color-text-light);
+            border: none;
+            border-radius: 8px; /* Bordes más redondeados */
+            cursor: pointer;
+            font-weight: 600; /* Semibold */
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Sombra sutil */
+        }
+
+        .btn:hover {
+            background-color: #8C3E24; /* Un tono más oscuro del primario */
+            transform: translateY(-2px); /* Efecto ligero al pasar el ratón */
+        }
+
+        .btn-secondary {
+            background-color: var(--color-secondary);
+            color: var(--color-primary);
+            border: 1px solid var(--color-primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--color-primary);
+            color: var(--color-text-light);
+        }
+
+        /* Estilos de enlaces */
+        a {
+            color: var(--color-primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--color-accent); /* Cambia a color de acento al pasar el ratón */
+            text-decoration: underline;
+        }
+
+        /* =====================================================================
+         * 4. Layout Principal (Mobile-First)
+         * Estructura de la página con encabezado fijo, sección principal
+         * (hero) y sección de menú.
+         * ===================================================================== */
+        /* Header (Encabezado fijo) */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--color-secondary);
+            padding: var(--spacing-sm) 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 1000; /* Asegura que el header esté por encima de otros elementos */
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: center; /* Centra el logo */
+            align-items: center;
+        }
+
+        .header__logo img {
+            height: 45px; /* Tamaño del logo para móvil */
+            border-radius: 50%; /* Logo circular */
+        }
+
+        /* Hero Section (Sección Principal Destacada) */
+        .hero-section {
+            background-image: url('https://placehold.co/1200x800/A34A2A/FFF?text=Fondo+Restaurante'); /* Imagen de fondo para la sección hero */
+            background-size: cover;
+            background-position: center;
+            color: var(--color-text-light);
+            text-align: center;
+            padding: calc(var(--spacing-xxl) + 60px) var(--spacing-sm) var(--spacing-xxl); /* Ajuste de padding superior para el header fijo */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 85vh; /* Altura mínima para asegurar visibilidad del fondo */
+            position: relative; /* Para el overlay */
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4); /* Overlay oscuro para mejor contraste del texto */
+            z-index: 1;
+        }
+
+        .hero-section > * { /* Asegura que el contenido esté por encima del overlay */
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-section h1 {
+            color: var(--color-text-light);
+            font-size: var(--font-size-h1);
+            margin-bottom: var(--spacing-md);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Sombra para el texto del título */
+        }
+
+        .hero-section p {
+            font-size: 1.15rem;
+            margin-bottom: var(--spacing-lg);
+            max-width: 600px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        /* Menu Section (Sección del Menú) */
+        .menu-section {
+            padding: var(--spacing-xl) 0;
+            background-color: var(--color-background);
+        }
+
+        .menu-section h2 {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+            color: var(--color-primary);
+            font-size: var(--font-size-h2);
+        }
+
+        /* Grid para las tarjetas del menú (una columna en móvil) */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Una columna por defecto en móvil */
+            gap: var(--spacing-lg); /* Espacio entre tarjetas */
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--color-primary);
+            color: var(--color-text-light);
+            padding: var(--spacing-lg) 0 var(--spacing-sm);
+            text-align: center;
+        }
+
+        .footer .container {
+            display: flex;
+            flex-direction: column; /* Apila secciones en móvil */
+            gap: var(--spacing-lg);
+        }
+
+        .footer__section {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .footer__heading {
+            color: var(--color-secondary);
+            margin-bottom: var(--spacing-sm);
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .footer a {
+            color: var(--color-text-light);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: var(--color-accent);
+            text-decoration: underline;
+        }
+
+        .footer__social-links {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-sm);
+        }
+
+        .footer__social-links img {
+            width: 35px; /* Tamaño de los iconos de redes sociales */
+            height: 35px;
+            filter: invert(1); /* Para iconos blancos en fondo oscuro */
+            transition: transform 0.2s ease;
+            border-radius: 50%; /* Iconos circulares */
+        }
+
+        .footer__social-links img:hover {
+            transform: scale(1.1); /* Efecto de zoom al pasar el ratón */
+        }
+
+        .footer__copyright {
+            margin-top: var(--spacing-lg);
+            border-top: 1px solid rgba(255,255,255,0.15); /* Línea divisoria */
+            padding-top: var(--spacing-sm);
+            font-size: 0.85rem;
+        }
+
+        /* =====================================================================
+         * 5. Componentes .menu-card (BEM)
+         * Estilos para las tarjetas individuales de cada plato en el menú.
+         * ===================================================================== */
+        .menu-card {
+            background-color: var(--color-text-light);
+            border-radius: 12px; /* Bordes más redondeados para las tarjetas */
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15); /* Sombra más pronunciada */
+            overflow: hidden; /* Asegura que la imagen respete el border-radius */
+            display: flex;
+            flex-direction: column; /* Apila elementos verticalmente en móvil */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-5px); /* Efecto de elevación al pasar el ratón */
+            box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+        }
+
+        .menu-card__image {
+            width: 100%;
+            height: 220px; /* Altura fija para consistencia en móvil */
+            object-fit: cover; /* Recorta la imagen para cubrir el área */
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+
+        .menu-card__content {
+            padding: var(--spacing-md);
+            flex-grow: 1; /* Permite que el contenido ocupe el espacio restante */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu-card__name {
+            font-size: var(--font-size-h4);
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .menu-card__description {
+            font-size: 0.95rem;
+            color: var(--color-text-dark);
+            margin-bottom: var(--spacing-sm);
+            flex-grow: 1; /* Permite que la descripción ocupe el espacio disponible */
+        }
+
+        .menu-card__price {
+            font-size: 1.3rem;
+            font-weight: 700; /* Bold */
+            color: var(--color-accent); /* Precio en color de acento */
+            display: block;
+            text-align: right; /* Alinea el precio a la derecha */
+            margin-top: var(--spacing-sm); /* Espacio superior para separar de la descripción */
+        }
+
+        /* =====================================================================
+         * 6. Diseño Completamente Responsive (Media Queries)
+         * Ajustes para tablets y desktops, manteniendo el enfoque mobile-first.
+         * ===================================================================== */
+
+        /* Media Query para Tablets (ancho mínimo 768px) */
+        @media (min-width: 768px) {
+            .container {
+                padding-left: var(--spacing-md);
+                padding-right: var(--spacing-md);
+            }
+
+            .header__logo img {
+                height: 55px; /* Logo más grande en tablet */
+            }
+
+            .hero-section {
+                padding: calc(var(--spacing-xxl) + 80px) var(--spacing-md) var(--spacing-xxl);
+            }
+
+            .hero-section h1 {
+                font-size: 3.5rem; /* Título más grande en tablet */
+            }
+
+            .menu-grid {
+                grid-template-columns: repeat(2, 1fr); /* Dos columnas en tablet */
+            }
+
+            .footer .container {
+                flex-direction: row; /* Columnas en tablet/desktop */
+                justify-content: space-around;
+                text-align: left;
+            }
+
+            .footer__social-links {
+                justify-content: flex-start;
+            }
+        }
+
+        /* Media Query para Desktops (ancho mínimo 1024px) */
+        @media (min-width: 1024px) {
+            .container {
+                padding-left: var(--spacing-lg);
+                padding-right: var(--spacing-lg);
+            }
+
+            .header__logo img {
+                height: 60px; /* Logo más grande en desktop */
+            }
+
+            .hero-section {
+                padding: calc(var(--spacing-xxl) + 100px) var(--spacing-lg) var(--spacing-xxl);
+            }
+
+            .hero-section h1 {
+                font-size: 4.5rem; /* Título aún más grande en desktop */
+            }
+
+            .menu-grid {
+                grid-template-columns: repeat(3, 1fr); /* Tres columnas en desktop */
+            }
+        }
+
+        /* =====================================================================
+         * 7. Utilidades CSS (Clases de ayuda)
+         * Clases para aplicar estilos comunes rápidamente.
+         * ===================================================================== */
+        .text-center { text-align: center; }
+        .text-left { text-align: left; }
+        .text-right { text-align: right; }
+
+        .mb-xs { margin-bottom: var(--spacing-xs); }
+        .mb-sm { margin-bottom: var(--spacing-sm); }
+        .mb-md { margin-bottom: var(--spacing-md); }
+        .mb-lg { margin-bottom: var(--spacing-lg); }
+        .mb-xl { margin-bottom: var(--spacing-xl); }
+
+        .mt-xs { margin-top: var(--spacing-xs); }
+        .mt-sm { margin-top: var(--spacing-sm); }
+        .mt-md { margin-top: var(--spacing-md); }
+        .mt-lg { margin-top: var(--spacing-lg); }
+        .mt-xl { margin-top: var(--spacing-xl); }
+
+        .py-sm { padding-top: var(--spacing-sm); padding-bottom: var(--spacing-sm); }
+        .py-md { padding-top: var(--spacing-md); padding-bottom: var(--spacing-md); }
+        .py-lg { padding-top: var(--spacing-lg); padding-bottom: var(--spacing-lg); }
+
+        .px-sm { padding-left: var(--spacing-sm); padding-right: var(--spacing-sm); }
+        .px-md { padding-left: var(--spacing-md); padding-right: var(--spacing-md); }
+        .px-lg { padding-left: var(--spacing-lg); padding-right: var(--spacing-lg); }
+
+        /* Clases de visibilidad (ej. para elementos que solo se ven en ciertas pantallas) */
+        .d-none { display: none !important; }
+        .d-block { display: block !important; }
+
+        @media (min-width: 768px) {
+            .d-tablet-block { display: block !important; }
+            .d-tablet-none { display: none !important; }
+        }
+        @media (min-width: 1024px) {
+            .d-desktop-block { display: block !important; }
+            .d-desktop-none { display: none !important; }
+        }
+
+        /* =====================================================================
+         * NUEVO: Navegación Fija en la Parte Inferior
+         * ===================================================================== */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--color-primary); /* Fondo oscuro para contraste */
+            padding: var(--spacing-sm) 0; /* Padding vertical */
+            box-shadow: 0 -4px 12px rgba(0,0,0,0.15); /* Sombra hacia arriba */
+            z-index: 1000;
+        }
+
+        .bottom-nav ul {
+            display: flex;
+            justify-content: space-around; /* Distribuye los elementos uniformemente */
+            align-items: center;
+            padding: 0 var(--spacing-sm); /* Padding horizontal */
+        }
+
+        .bottom-nav a {
+            color: var(--color-text-light); /* Texto claro en fondo oscuro */
+            font-weight: 600;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            display: block;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .bottom-nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1); /* Efecto hover sutil */
+            color: var(--color-secondary); /* Resalta al pasar el ratón */
+            text-decoration: none;
+        }

@@ -1,0 +1,36 @@
+.fortaleza{
+    background: black;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    width: 700px;
+}
+
+
+.torre{
+    width: 100px;
+    height: 500px;
+    background: grey;
+    
+    
+
+}
+
+
+.muralla-central{
+    background-color: aliceblue;
+    width: 400px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.ventan{
+    height: 100px;
+    width: 400px;
+    background-color: black;
+    border: 2px solid rgb(204, 200, 200);
+    bord
+}
